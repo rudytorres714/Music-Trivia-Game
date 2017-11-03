@@ -80,7 +80,7 @@ var cards = [
     },
 
  {
-        question: "Take a Look of what you've done, now do we have a date ?",
+        question: "Take a Look of what you've done, now do we have a date in mind?",
         correctAnswer: '2014',
         answer1: '2017',
         answer2: '2013',
