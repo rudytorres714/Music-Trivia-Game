@@ -1,8 +1,15 @@
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//  /////                   set my variables here               /////
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 var correctAnswers = 0;
 var incorrectAnswers = 0;
 var unanswered = 0;
 var count = 0;
 
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//  ////  set functions for timer, countdown, set interval, also invoking / calling functions ////
+//  ////  to set timer / countdown timer with an if statement to check when timer reaches 0   ////
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 function countDown() {
     timer =31;
     interval = setInterval(timerDecrease, 1000);
@@ -18,6 +25,7 @@ function timerDecrease() {
         skip()
     }
 }
+
 timerDecrease();
 
 function stopTimer() {
@@ -25,15 +33,16 @@ function stopTimer() {
     interval = null
 }
 
-
-
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//  // put a event prevent-default click to prevent page from reloading  //
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 $("#choice1").click(function (event)  {
     event.preventDefault();
-
-
 });
 
-
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//  /////    set a object with questions - answers - video etc  /////
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 var cards = [
     {
         question: 'Answer these questions like you do, Released ?',
@@ -79,7 +88,7 @@ var cards = [
 
     },
 
- {
+    {
         question: "Take a Look of what you've done, now do we have a date in mind?",
         correctAnswer: '2014',
         answer1: '2017',
@@ -131,7 +140,7 @@ var cards = [
     },
 
     {
-        question: "I'll throw you some * changes * backing up in time when did this hit thr streets ?",
+        question: "I'll throw you some * changes * backing up in time when did this hit the streets ?",
         correctAnswer: '1998',
         answer1: '2000',
         answer2: '1992',
@@ -150,9 +159,11 @@ var cards = [
         video: " <iframe width=\"400\" height=\"225\" src=\"https://embed.vevo.com?isrc=USUV71600493&autoplay=true\" allowfullscreen=\"\"></iframe>\n"
     }
 
-];
+    ];
 
-
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//  /////  function to display my selected object info onto DOM  /////
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 function displayCard(card) {
     $("#questions").text(card.question);
     $("#choice1").text(card.answer1);
@@ -160,31 +171,44 @@ function displayCard(card) {
     $("#choice3").text(card.answer3);
     $("#choice4").text(card.answer4);
     $("#play").html(card.video);
-
 }
+
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//  /////    invoking / calling displayCard function to start    /////
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 displayCard(cards[count]);
 
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//  ////  set a skip function to move on to next question when time runs out  ////
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 function skip() {
         count++;
         unanswered++;
     countDown();
     displayCard(cards[count]);
-
 }
 
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//  ////  put function event when user clicks on choice and we grab that info  by  ////
+//  //// using the .this to grab text and pass info to compare with if statements ////
+//  ////  and we add / increment correct or incorrect answers based on comparison ////
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 $(".choices").click(function (event) {
     $(this).text();
 
      if ($(this).text() === cards[count].correctAnswer){
         correctAnswers++;
-        console.log( correctAnswers);
     }
     else {
         incorrectAnswers++;
     }
 
-    console.log(incorrectAnswers);
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//  ////   when count index reach 11 hide the info questions and append results of correct  ////
+//  ////   & incorrect answers, I also put if statement if unanswered is greater than 0     ////
+//  ////   display how many the user did not answer, if it does equal 0 it will not display ////
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     event.preventDefault();
     count++;
     if (count === 11) {
@@ -199,6 +223,10 @@ $(".choices").click(function (event) {
         $("#results").append(" <h3> You didn't answer " + unanswered + " Questions </h3>")
     }
 
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//  ////    count increases from above after click event happens, the function displayCard     ////
+//  ////    gets called / invoked again until it cycles through to count 11 then it stops      ////
+//  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 displayCard(cards[count]);
 stopTimer();
 countDown();

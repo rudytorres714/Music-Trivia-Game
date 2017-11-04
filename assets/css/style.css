@@ -1,5 +1,6 @@
 .headColor  {
     background-color: rebeccapurple;
+    margin-top: 40px;
 }
 
 #headInfo   {
@@ -10,11 +11,37 @@ a   {
     color: black;
 }
 
+a:link  {
+    color: white;
+    text-decoration: none;
+}
+
+a:visited   {
+    color: black;
+}
+
+a:active    {
+    color: black;
+}
+
 a:hover {
     color: white;
     background-color: rebeccapurple;
 }
-a:link  {
-    text-decoration: none;
+body    {
+    background-image: url("../images/starnight.gif");
 }
 
+h3  {
+    color: white;
+}
+
+.choices  {
+    color: white;
+}
+h1  {
+    color: white;
+}
+#questions  {
+    color: white;
+}
