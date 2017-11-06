@@ -11,7 +11,7 @@ var count = 0;
 //  ////  to set timer / countdown timer with an if statement to check when timer reaches 0   ////
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 function countDown() {
-    timer =31;
+    timer =4;
     interval = setInterval(timerDecrease, 1000);
 }
 countDown();
@@ -21,8 +21,10 @@ function timerDecrease() {
     $("#timeRemaining").html(timer);
 
     if(timer === 0) {
+        unanswered++;
         stopTimer();
-        skip()
+        skip();
+
     }
 }
 
@@ -182,10 +184,21 @@ displayCard(cards[count]);
 //  ////  set a skip function to move on to next question when time runs out  ////
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 function skip() {
+    if (count === 10) {
+        $("#play").text("");
+        $(".choices").hide();
+        $("#questions").hide();
+        $("#timeRemaining").hide();
+        $("#time").hide();
+        $("#results").append(" <h3> You answered " + correctAnswers + " Question(s) correctly </h3>");
+        $("#results").append("<h3> Unfortunately you answered " + incorrectAnswers + " Question(s) incorrectly </h3>");
+        if(unanswered >= 0)
+            $("#results").append(" <h3> You didn't answer " + unanswered + " Questions </h3>")
+    }else {
         count++;
-        unanswered++;
-    countDown();
-    displayCard(cards[count]);
+        countDown();
+        displayCard(cards[count]);
+    }
 }
 
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
