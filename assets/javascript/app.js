@@ -11,7 +11,7 @@ var count = 0;
 //  ////  to set timer / countdown timer with an if statement to check when timer reaches 0   ////
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 function countDown() {
-    timer =4;
+    timer =31;
     interval = setInterval(timerDecrease, 1000);
 }
 countDown();
