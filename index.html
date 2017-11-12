@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Trivia Game</title>
+    <title>Music Trivia</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
@@ -25,18 +25,39 @@
 
     <h2 id="questions"></h2>
 
-    <h2> <a id="choice1" class="choices" href="#"></a></h2>
+    <button id="choice1" type="button" class="btn btn-info btn-lg choices" data-toggle="modal" data-target="#choice"></button>
 
-    <h2> <a id="choice2" class="choices" href="#"></a></h2>
+    <button id="choice2" type="button" class="btn btn-info btn-lg choices" data-toggle="modal" data-target="#choice"></button>
 
-    <h2> <a id="choice3" class="choices"  href="#"></a></h2>
+    <button id="choice3" type="button" class="btn btn-info btn-lg choices" data-toggle="modal" data-target="#choice"></button>
 
-    <h2> <a id="choice4" class="choices"  href="#"></a></h2>
+    <button id="choice4" type="button" class="btn btn-info btn-lg choices" data-toggle="modal" data-target="#choice"></button>
 
+    <div class="modal fade" id="choice" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-body ">
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </div>
+<br>
 
+
+
+<div id="buttonDiv">
+    <button id="restartButton" class="play" onclick="playAgain()"> Play Again </button>
+</div>
+<br>
+<br>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 

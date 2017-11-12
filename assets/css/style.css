@@ -17,7 +17,7 @@ a:link  {
 }
 
 a:visited   {
-    color: black;
+    color: white;
 }
 
 a:active    {
@@ -38,10 +38,28 @@ h3  {
 
 .choices  {
     color: white;
+    margin-left: 10px;
+    margin-top: 20px;
 }
 h1  {
     color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: -15px;
 }
 #questions  {
     color: white;
+}
+#buttonDiv  {
+    text-align: center;
+
+}
+div     {
+    text-align: center;
+}
+.play   {
+    background-color: rebeccapurple;
+    color: white;
+    font-size: 20px;
+
 }

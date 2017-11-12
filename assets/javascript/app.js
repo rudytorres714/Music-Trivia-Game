@@ -10,8 +10,9 @@ var count = 0;
 //  ////  set functions for timer, countdown, set interval, also invoking / calling functions ////
 //  ////  to set timer / countdown timer with an if statement to check when timer reaches 0   ////
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+$("#restartButton").hide();
 function countDown() {
-    timer =31;
+    timer = 31;
     interval = setInterval(timerDecrease, 1000);
 }
 countDown();
@@ -20,11 +21,12 @@ function timerDecrease() {
     timer--;
     $("#timeRemaining").html(timer);
 
-    if(timer === 0) {
-        unanswered++;
+    if(timer < 0) {
         stopTimer();
+        unanswered++;
+        $("#play").text("");
+        alert(" Times up! you ran out of time, the answer is " + cards[count].correctAnswer);
         skip();
-
     }
 }
 
@@ -182,6 +184,7 @@ displayCard(cards[count]);
 
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //  ////  set a skip function to move on to next question when time runs out  ////
+//  ////  refer to lines 23 - 28 from above for reference and details         ////
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 function skip() {
     if (count === 10) {
@@ -190,13 +193,16 @@ function skip() {
         $("#questions").hide();
         $("#timeRemaining").hide();
         $("#time").hide();
+        $("#restartButton").show();
+
         $("#results").append(" <h3> You answered " + correctAnswers + " Question(s) correctly </h3>");
         $("#results").append("<h3> Unfortunately you answered " + incorrectAnswers + " Question(s) incorrectly </h3>");
-        if(unanswered >= 0)
-            $("#results").append(" <h3> You didn't answer " + unanswered + " Questions </h3>")
-    }else {
+        if(unanswered >= 0) $("#results").append(" <h3> You didn't answer " + unanswered + " Question(s) </h3>");
+    }
+    else {
         count++;
         countDown();
+        $("#timeRemaining").html(timer);
         displayCard(cards[count]);
     }
 }
@@ -206,15 +212,16 @@ function skip() {
 //  //// using the .this to grab text and pass info to compare with if statements ////
 //  ////  and we add / increment correct or incorrect answers based on comparison ////
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 $(".choices").click(function (event) {
     $(this).text();
 
      if ($(this).text() === cards[count].correctAnswer){
         correctAnswers++;
+        $(".modal-body").text("You got it right!! the answer is " +  $(this).text() ) //")//.append("You got it right!! the answer is " +  $(this).text() )
     }
     else {
         incorrectAnswers++;
+        $(".modal-body").text(" Sorry you got it wrong, the answer is " + cards[count].correctAnswer)
     }
 
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -230,10 +237,12 @@ $(".choices").click(function (event) {
         $("#questions").hide();
         $("#timeRemaining").hide();
         $("#time").hide();
+        $("#restartButton").show();
+
         $("#results").append(" <h3> You answered " + correctAnswers + " Question(s) correctly </h3>");
         $("#results").append("<h3> Unfortunately you answered " + incorrectAnswers + " Question(s) incorrectly </h3>");
         if(unanswered > 0)
-        $("#results").append(" <h3> You didn't answer " + unanswered + " Questions </h3>")
+        $("#results").append(" <h3> You didn't answer " + unanswered + " Question(s) </h3>")
     }
 
 //  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -245,3 +254,7 @@ stopTimer();
 countDown();
 
 });
+
+function playAgain() {
+    location.reload()
+}
